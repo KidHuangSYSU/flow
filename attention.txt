@@ -1,0 +1,25 @@
+瀑布流：等宽不等高
+
+js篇
+1，每个块的结构
+#main
+  .box
+    .pic
+      img
+1.1根据当前页面宽来确定#main的宽度并居中显示
+1.2每个.box通过padding来分开，
+  这样可以通过.offsetWidth来获得其高宽
+1.3img不设好高度的话，在chrome下使父元素塌陷
+2，步骤
+2.1通过json文件动态创建块，
+   如果是第一次读入，确定好有几列和#main的宽度，居中显示，
+2.2为每个块确定位置
+2.3添加onscroll事件
+3，注意
+3.1，childNodes将获得所有子节点
+3.2，数组求最小值：Math.min.apply(null, arr)
+3.3，node.className
+     node.style.top/left返回带单位
+     node.offsetWidth不带单位
+     document.(documentElement|body).clientWidth/scrollTop不带单位
+3.4，node.style.cssText = "height:10px; width:20px.."

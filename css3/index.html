@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSS3实现瀑布流</title>
+  <link type="text/css" rel="stylesheet" href="mycss.css" />
+</head>
+<body>
+  <div id="main">
+  </div>
+
+  <script type="text/javascript">
+  	var data = {'images':[{'src':'../img/0.jpg','width':230,'height':319},{'src':'../img/1.jpg','width':230,'height':271},{'src':'../img/2.jpg','width':230,'height':165},{'src':'../img/3.jpg','width':230,'height':152},{'src':'../img/4.jpg','width':230,'height':165},{'src':'../img/5.jpg','width':230,'height':153},{'src':'../img/6.jpg','width':230,'height':319},{'src':'../img/7.jpg','width':230,'height':155},{'src':'../img/8.jpg','width':230,'height':230},{'src':'../img/9.jpg','width':230,'height':172},{'src':'../img/10.jpg','width':230,'height':345},{'src':'../img/11.jpg','width':230,'height':165},{'src':'../img/12.jpg','width':230,'height':287},{'src':'../img/13.jpg','width':230,'height':172},{'src':'../img/14.jpg','width':230,'height':191},{'src':'../img/15.jpg','width':230,'height':167},{'src':'../img/16.jpg','width':230,'height':172},{'src':'../img/17.jpg','width':230,'height':307},{'src':'../img/18.jpg','width':230,'height':319},{'src':'../img/19.jpg','width':230,'height':319}]};
+    function readData(id, data) {
+      var node = document.getElementById(id);
+      for (var i = 0; i < data.images.length; ++i) {
+        var box = document.createElement("div");
+        box.className = "box";
+        var pic = document.createElement("div");
+        pic.className = "pic";
+        var img = document.createElement("img");
+        img.src = data.images[i].src;
+        img.style.cssText = "width:" + data.images[i].width + "px; height:" + data.images[i].height + "px";
+        pic.appendChild(img);
+        box.appendChild(pic);
+        node.appendChild(box);
+      }
+    }
+    window.onload = function() {
+      var last = 0;
+      var curr;
+      readData("main", data);
+      function toEnd(cname) {
+        curr = document.documentElement.scrollTop | document.body.scrollTop;
+        if (curr-last > 500) {
+          last = curr;
+          return true;
+        }
+        return false;
+      }
+      window.onscroll = function() {
+        if (toEnd("box"))
+          readData("main", data);
+      }
+    }
+  </script>
+</body>
+</html>
